@@ -1,9 +1,9 @@
 from rest_framework.response import Response
-from rest_framework import permissions
+from rest_framework import permissions, status
 from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView, RetrieveAPIView
-from blog.models import BlogPost
-from blog.serializers import BlogPostSerializer, AllBlogPostsSerializer, BlogPostByCategorySerializer
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
+from blog.models import BlogPost, Suscriptor
+from blog.serializers import BlogPostSerializer, AllBlogPostsSerializer, BlogPostByCategorySerializer, SubscriptionSerializer
 
 class BlogPostListView(ListAPIView):
     queryset = BlogPost.objects.order_by('-date_published')
@@ -32,9 +32,26 @@ class BlogPostCategoryView(APIView):
 
     def post(self, request, format=None):
         data = self.request.data
+        print(data)
         category = data['category']
+        print(category)
         queryset = BlogPost.objects.order_by('-date_created').filter(category__iexact=category)
         
         serializer = BlogPostSerializer(queryset, many=True)
 
+        return Response(serializer.data)
+
+class SuscriberView(CreateAPIView):
+    serializer_class = SubscriptionSerializer
+    permission_classes = (permissions.AllowAny, )
+
+    def create(self, request, format=None):
+        data = self.request.data
+        queryset = Suscriptor.objects.filter(email=data['email']).count()
+        if queryset:
+            print("holaaaaaaaaaaaaaaaa")
+            return Response({"msg": "E-mail ya existe"}, status=status.HTTP_409_CONFLICT)
+        suscriber = Suscriptor(email=data['email'], name=data['name'])
+        suscriber.save()
+        serializer = SubscriptionSerializer(suscriber)
         return Response(serializer.data)

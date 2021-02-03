@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from .models import BlogPost
+from .models import BlogPost, Suscriptor
 
 
 class BlogPostSerializer(serializers.ModelSerializer):
@@ -20,3 +20,10 @@ class BlogPostByCategorySerializer(serializers.ModelSerializer):
         model = BlogPost
         fields = ('category', )
         lookup_field = 'slug'
+
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Suscriptor
+        fields = ('name', 'email', 'date_joined')
+        lookup_field = "email"
