@@ -45,3 +45,11 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.title
+
+class Suscriptor(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.CharField(max_length=50, unique=True)
+    date_joined = DateField(auto_now=True)
+
+    def __str__(self):
+        return self.email
