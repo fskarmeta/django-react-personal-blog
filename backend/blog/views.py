@@ -3,11 +3,11 @@ from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from blog.models import BlogPost
-from blog.serializers import BlogPostSerializer
+from blog.serializers import BlogPostSerializer, AllBlogPostsSerializer, BlogPostByCategorySerializer
 
 class BlogPostListView(ListAPIView):
-    queryset = BlogPost.objects.order_by('-date_created')
-    serializer_class = BlogPostSerializer
+    queryset = BlogPost.objects.order_by('-date_published')
+    serializer_class = AllBlogPostsSerializer
     lookup_field = 'slug'
     permission_classes = (permissions.AllowAny, )
 
@@ -25,8 +25,10 @@ class BlogPostFeaturedView(ListAPIView):
     permission_classes = (permissions.AllowAny, )
 
 class BlogPostCategoryView(APIView):
-    serializer_class = BlogPostSerializer
+    serializer_class = BlogPostByCategorySerializer
+    # serializer_class = BlogPostSerializer
     permission_classes = (permissions.AllowAny, )
+    lookup_field = 'slug'
 
     def post(self, request, format=None):
         data = self.request.data

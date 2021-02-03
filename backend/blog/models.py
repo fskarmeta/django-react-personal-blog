@@ -1,6 +1,8 @@
 from django.db import models
 from datetime import datetime
+from random import randint
 from django.template.defaultfilters import slugify
+from django.db.models import DateField
 
 class Categories(models.TextChoices):
     PROGRAMACION = 'programacion'
@@ -15,26 +17,20 @@ class BlogPost(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField()
     category = models.CharField(max_length=200, choices=Categories.choices, default=Categories.OTROS)
-    thumbnail = models.ImageField(upload_to='photos/%Y/%m/$d')
     excerpt = models.CharField(max_length=200)
-    month = models.CharField(max_length=3)
-    day = models.CharField(max_length=2)
+    date_published = models.DateField(default=datetime.now, blank=True)
     content = models.TextField()
     featured = models.BooleanField(default=False)
     date_created = models.DateTimeField(default=datetime.now, blank=True)
 
-    def save(self, *args, **kwargs):
-        original_slug = slugify(self.title)
-        queryset = BlogPost.objects.all().filter(slug__iexact=original_slug).count()
+   
 
-        count = 1
-        slug = original_slug
-        while(queryset):
-            slug = original_slug + "-" + str(count)
-            count += 1
-            queryset = BlogPost.objects.all().filter(slug_iexact=slug).count()
-        
-        self.slug = slug
+    def save(self, *args, **kwargs):
+        if BlogPost.objects.filter(title=self.title).exists():
+            extra = str(randint(1, 10000))
+            self.slug = slugify(self.title) + "-" + extra
+        else:
+            self.slug = slugify(self.title)
 
         if self.featured:
             try:

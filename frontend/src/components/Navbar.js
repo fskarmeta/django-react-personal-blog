@@ -1,4 +1,4 @@
-// import { a } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../styles/navbar.css";
 const Navbar = () => {
   return (
@@ -6,14 +6,14 @@ const Navbar = () => {
       <header className="blog-header py-3">
         <div className="row flex-nowrap justify-content-between align-items-center">
           <div className="col-4 pt-1">
-            <a className="text-muted" href="#">
+            <button className="text-muted" href="#">
               Suscribete
-            </a>
+            </button>
           </div>
           <div className="col-4 text-center">
-            <a className="blog-header-logo text-dark" href="#">
+            <Link className="blog-header-logo text-dark" to="/">
               Blog del Báfian
-            </a>
+            </Link>
           </div>
           <div className="col-4 d-flex justify-content-end align-items-center">
             <a className="text-muted" href="#">
@@ -24,48 +24,51 @@ const Navbar = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className="mx-3"
               >
                 <circle cx="10.5" cy="10.5" r="7.5"></circle>
                 <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
               </svg>
             </a>
-            {/* <a className="btn btn-sm btn-outline-secondary" href="#">
+            {/* <Link className="btn btn-sm btn-outline-secondary" href="#">
               Sign up
-            </a> */}
+            </Link> */}
           </div>
         </div>
       </header>
 
       <div className="nav-scroller py-1 mb-2">
         <nav className="nav d-flex justify-content-between">
-          <a className="p-2 text-muted" href="#">
+          <Link className="p-2 text-muted" to="/">
+            Home
+          </Link>
+          <Link className="p-2 text-muted" to="/categoria/programacion">
             Programación
-          </a>
-          <a className="p-2 text-muted" href="#">
+          </Link>
+          <Link className="p-2 text-muted" to="/categoria/musica">
             Música
-          </a>
-          <a className="p-2 text-muted" href="#">
+          </Link>
+          <Link className="p-2 text-muted" to="/categoria/cronicas">
             Crónicas
-          </a>
-          <a className="p-2 text-muted" href="#">
+          </Link>
+          <Link className="p-2 text-muted" to="/categoria/articulos">
             Artículos
-          </a>
-          <a className="p-2 text-muted" href="#">
+          </Link>
+          <Link className="p-2 text-muted" to="/categoria/literatura">
             Literatura
-          </a>
-          <a className="p-2 text-muted" href="#">
+          </Link>
+          <Link className="p-2 text-muted" to="/categoria/opinion">
             Opinion
-          </a>
-          <a className="p-2 text-muted" href="#">
-            Politics
-          </a>
-          <a className="p-2 text-muted" href="#">
+          </Link>
+          <Link className="p-2 text-muted" to="/categoria/politica">
+            Politica
+          </Link>
+          <Link className="p-2 text-muted" to="/categoria/otros">
             Miscelaneo
-          </a>
+          </Link>
         </nav>
       </div>
     </>
