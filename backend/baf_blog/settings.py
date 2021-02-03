@@ -147,6 +147,17 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 SUMMERNOTE_THEME = 'bs4'
 
+SUMMERNOTE_CONFIG = {
+    'summernote': {
+        'fontNames': [
+      'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New',
+      'Helvetica Neue', 'Helvetica', 'Impact', 'Lucida Grande',
+      'Tahoma', 'Times New Roman', 'Verdana','Cambria', 'Charter', 'Georgia'
+    ],
+        'fontSizes': ['8', '9', '10', '11', '12', '14', '18','20','22', '24', '36'],
+    },
+}
+
 CORS_ORIGIN_ALLOW_ALL = True
 
 ALLOWED_HOSTS = ['*']
