@@ -49,9 +49,8 @@ class SuscriberView(CreateAPIView):
         data = self.request.data
         queryset = Suscriptor.objects.filter(email=data['email']).count()
         if queryset:
-            print("holaaaaaaaaaaaaaaaa")
             return Response({"msg": "E-mail ya existe"}, status=status.HTTP_409_CONFLICT)
-        suscriber = Suscriptor(email=data['email'], name=data['name'])
+        suscriber = Suscriptor(**data)
         suscriber.save()
         serializer = SubscriptionSerializer(suscriber)
         return Response(serializer.data)
