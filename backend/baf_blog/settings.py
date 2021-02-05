@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
@@ -52,7 +51,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -63,11 +61,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'baf_blog.urls'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-WHITENOISE_MIMETYPES = {
-    '.xsl': 'application/xml'
-}
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -141,7 +134,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static')
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -159,11 +152,11 @@ SUMMERNOTE_THEME = 'bs4'
 SUMMERNOTE_CONFIG = {
     'summernote': {
         'fontNames': [
-      'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New',
-      'Helvetica Neue', 'Helvetica', 'Impact', 'Lucida Grande',
-      'Tahoma', 'Times New Roman', 'Verdana','Cambria', 'Charter', 'Georgia'
-    ],
-        'fontSizes': ['8', '9', '10', '11', '12', '14', '18','20','22', '24', '36'],
+            'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New',
+            'Helvetica Neue', 'Helvetica', 'Impact', 'Lucida Grande',
+            'Tahoma', 'Times New Roman', 'Verdana', 'Cambria', 'Charter', 'Georgia'
+        ],
+        'fontSizes': ['8', '9', '10', '11', '12', '14', '18', '20', '22', '24', '36'],
     },
 }
 
