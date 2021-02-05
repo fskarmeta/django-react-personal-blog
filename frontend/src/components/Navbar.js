@@ -27,7 +27,6 @@ const Navbar = () => {
         </div>
       </header>
       <NavList />
-
       <SubscriptionModal />
     </>
   );
