@@ -12,6 +12,8 @@ pillow = "*"
 psycopg2 = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
+gunicorn = "*"
+whitenoise = "*"
 
 [dev-packages]
 

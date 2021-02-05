@@ -4,6 +4,10 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
 from blog.models import BlogPost, Suscriptor
 from blog.serializers import BlogPostSerializer, AllBlogPostsSerializer, BlogPostByCategorySerializer, SubscriptionSerializer
+from django.views import View
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound
+import os
 
 class BlogPostListView(ListAPIView):
     queryset = BlogPost.objects.order_by('-date_published')
@@ -54,3 +58,15 @@ class SuscriberView(CreateAPIView):
         suscriber.save()
         serializer = SubscriptionSerializer(suscriber)
         return Response(serializer.data)
+
+
+class Assets(View):
+
+    def get(self, _request, filename):
+        path = os.path.join(os.path.dirname(__file__), 'static', filename)
+
+        if os.path.isfile(path):
+            with open(path, 'rb') as file:
+                return HttpResponse(file.read(), content_type='application/javascript')
+        else:
+            return HttpResponseNotFound()
